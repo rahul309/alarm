@@ -1,5 +1,5 @@
 module "nlb_healthyhosts" {
-  source              = "https://github.com/rahul309/alarm/module"
+  source              = "https://github.com/rahul309/alarm/blob/main/module"
   //alarm_name          = "cwa-${var.appname}-${var.region}-nlb-${var.index}"
   
   comparison_operator = var.comparison_operator 
