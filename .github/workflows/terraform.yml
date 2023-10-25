@@ -11,7 +11,7 @@ on:
         - destroy
         required: true
   push:
-    branches: [ "main" ]
+    branches: [ "feature" ]
 
 jobs:
   terraform_staging:
