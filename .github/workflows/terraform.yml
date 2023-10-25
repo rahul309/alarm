@@ -51,6 +51,7 @@ jobs:
   deploy:
     needs: terraform_staging
     runs-on: ubuntu-latest
+    environment: production
     steps:
     - uses: actions/checkout@v1
 
