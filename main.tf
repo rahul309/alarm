@@ -1,13 +1,24 @@
-module "nlb_healthyhosts" {
-  source              = "https://github.com/rahul309/alarm/blob/main/module"
-  //alarm_name          = "cwa-${var.appname}-${var.region}-nlb-${var.index}"
-  
-  comparison_operator = var.comparison_operator 
-  namespace           = var.namespace 
-  statistic           = var.statistic 
-  
-  metric_name         = var.metric_name 
-  logstash_servers_count= var.logstash_servers_count
-  load_balancer = var.load_balancer
-  target_group = var.target_group
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "HelloWorld"
+  }
 }
