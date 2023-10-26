@@ -50,6 +50,7 @@ jobs:
   merge-branch:
     needs: terraform_staging
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - uses: actions/checkout@master
 
