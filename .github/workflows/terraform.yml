@@ -11,7 +11,7 @@ on:
         - destroy
         required: true
   push:
-    branches: [ "feature" ]
+    branches: [ "uat-feature" ]
 
 jobs:
   terraform_staging:
@@ -46,8 +46,20 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
       run: terraform apply -auto-approve -input=false
+      
+  merge-branch:
+    needs: terraform_staging
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
 
-
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: uat
+          message: Merge staging into uat
+          github_token: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     needs: terraform_staging
     runs-on: ubuntu-latest
