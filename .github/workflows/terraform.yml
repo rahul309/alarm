@@ -62,7 +62,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   
   deploy:
-    needs: terraform_staging
+    needs: merge-branch
     runs-on: ubuntu-latest
     environment: production
     steps:
