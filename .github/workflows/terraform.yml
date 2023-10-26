@@ -50,7 +50,7 @@ jobs:
   
   
   deploy:
-    
+    needs: terraform_staging
     runs-on: ubuntu-latest
     environment: production
     steps:
