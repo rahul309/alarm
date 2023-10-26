@@ -60,6 +60,7 @@ jobs:
           target_branch: uat
           message: Merge staging into uat
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  
   deploy:
     needs: terraform_staging
     runs-on: ubuntu-latest
